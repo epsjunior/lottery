@@ -1,0 +1,29 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html,
+body {
+  height: 100%;
+}
+
+.wallet-adapter-button-trigger {
+  @apply bg-gray-700 hover:bg-gray-600 text-white font-bold py-2 px-4 rounded-3xl !important;
+}
+.wallet-adapter-dropdown-list,
+.wallet-adapter-button {
+  font-family: inherit !important;
+}
+
+.global-background{
+  background-image:
+    linear-gradient(rgba(16, 15, 29, 0.9), rgba(16, 15, 29, 0.9)), /* Overlay color with transparency */
+    url('/bg4.png');
+  background-color: #100F1D; /* Dark background color */
+  background-size: cover, cover, 400px, 300px, 300px;
+  background-repeat: no-repeat;
+  background-position: right;
+  min-height: 100vh;
+  padding-bottom: 50px;
+  position: relative;
+}

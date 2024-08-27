@@ -1,0 +1,295 @@
+{
+  "address": "3cKHyMrL3iDK6AuncuewRZT3KYdqJhn5PDAdhPsLR52w",
+  "metadata": {
+    "name": "lottery",
+    "version": "0.1.0",
+    "spec": "0.1.0",
+    "description": "Created with Anchor"
+  },
+  "instructions": [
+    {
+      "name": "buy_ticket",
+      "discriminator": [
+        11,
+        24,
+        17,
+        193,
+        168,
+        116,
+        164,
+        169
+      ],
+      "accounts": [
+        {
+          "name": "bingo_account",
+          "writable": true
+        },
+        {
+          "name": "winners",
+          "writable": true
+        },
+        {
+          "name": "user",
+          "writable": true,
+          "signer": true
+        },
+        {
+          "name": "system_program",
+          "address": "11111111111111111111111111111111"
+        }
+      ],
+      "args": [
+        {
+          "name": "chosen_number",
+          "type": "u8"
+        }
+      ]
+    },
+    {
+      "name": "claim_reward",
+      "discriminator": [
+        149,
+        95,
+        181,
+        242,
+        94,
+        90,
+        158,
+        162
+      ],
+      "accounts": [
+        {
+          "name": "bingo_account",
+          "writable": true
+        },
+        {
+          "name": "winners",
+          "writable": true
+        },
+        {
+          "name": "user",
+          "writable": true,
+          "signer": true
+        },
+        {
+          "name": "system_program",
+          "address": "11111111111111111111111111111111"
+        }
+      ],
+      "args": [
+        {
+          "name": "ticket_number",
+          "type": "u8"
+        }
+      ]
+    },
+    {
+      "name": "initialize",
+      "discriminator": [
+        175,
+        175,
+        109,
+        31,
+        13,
+        152,
+        155,
+        237
+      ],
+      "accounts": [
+        {
+          "name": "bingo_account",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  98,
+                  105,
+                  110,
+                  103,
+                  111,
+                  95,
+                  97,
+                  99,
+                  99,
+                  111,
+                  117,
+                  110,
+                  116
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "winners",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  119,
+                  105,
+                  110,
+                  110,
+                  101,
+                  114,
+                  115,
+                  95,
+                  97,
+                  99,
+                  99,
+                  111,
+                  117,
+                  110,
+                  116
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "user",
+          "writable": true,
+          "signer": true
+        },
+        {
+          "name": "system_program",
+          "address": "11111111111111111111111111111111"
+        }
+      ],
+      "args": []
+    }
+  ],
+  "accounts": [
+    {
+      "name": "BingoAccount",
+      "discriminator": [
+        32,
+        246,
+        219,
+        220,
+        244,
+        135,
+        218,
+        11
+      ]
+    },
+    {
+      "name": "Winners",
+      "discriminator": [
+        124,
+        173,
+        245,
+        175,
+        40,
+        115,
+        199,
+        91
+      ]
+    }
+  ],
+  "errors": [
+    {
+      "code": 6000,
+      "name": "AlreadyInitialized",
+      "msg": "The game has already been initialized."
+    },
+    {
+      "code": 6001,
+      "name": "Uninitialized",
+      "msg": "The game is not initialized."
+    },
+    {
+      "code": 6002,
+      "name": "NumberNotAvailable",
+      "msg": "The chosen number is not available."
+    },
+    {
+      "code": 6003,
+      "name": "NumberAlreadyTaken",
+      "msg": "The number is already taken."
+    },
+    {
+      "code": 6004,
+      "name": "RandomnessFailed",
+      "msg": "Randomness generation failed."
+    },
+    {
+      "code": 6005,
+      "name": "NotAWinner",
+      "msg": "You are not a winner."
+    },
+    {
+      "code": 6006,
+      "name": "InsufficientLamports",
+      "msg": "Insufficient lamports for the transaction."
+    }
+  ],
+  "types": [
+    {
+      "name": "BingoAccount",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "tickets",
+            "type": {
+              "vec": {
+                "defined": {
+                  "name": "Ticket"
+                }
+              }
+            }
+          },
+          {
+            "name": "initialized",
+            "type": "bool"
+          },
+          {
+            "name": "counter",
+            "type": "i8"
+          }
+        ]
+      }
+    },
+    {
+      "name": "Ticket",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "number",
+            "type": "u8"
+          },
+          {
+            "name": "user",
+            "type": {
+              "option": "pubkey"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "name": "Winners",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "keys",
+            "type": {
+              "vec": {
+                "defined": {
+                  "name": "Ticket"
+                }
+              }
+            }
+          }
+        ]
+      }
+    }
+  ]
+}
