@@ -33,7 +33,7 @@ export function UiLayout({
           </Link>
           <ul className="menu menu-horizontal px-1 space-x-2">
             {links.map(({ label, path }) => (
-              <li key={path}>
+              <li className="hidden md:block" key={path}>
                 <Link
                   className={pathname.startsWith(path) ? 'active' : ''}
                   href={path}
